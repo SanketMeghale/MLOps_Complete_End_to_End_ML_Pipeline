@@ -1,0 +1,11 @@
+data_ingestion:
+  test_size: 0.4
+feature_engineering:
+  max_features: 20
+model_building:
+  n_estimators: 10
+  random_state: 2
+  criterion: gini
+  max_depth: 30
+  min_samples_split: 3
+  min_samples_leaf: 2

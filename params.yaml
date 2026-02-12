@@ -1,9 +1,13 @@
 data_ingestion:
-  test_size: 0.30
+  test_size: 0.40
 
 feature_engineering:
-  max_features: 45
+  max_features: 20
 
 model_building:
-  n_estimators: 25
+  n_estimators: 10
   random_state: 2
+  criterion: gini         # gini 
+  max_depth: 30           # max depth of each tree
+  min_samples_split: 3  # minimum samples to split a node
+  min_samples_leaf: 2
