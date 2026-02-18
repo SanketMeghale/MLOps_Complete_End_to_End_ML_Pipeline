@@ -2,8 +2,10 @@ data_ingestion:
   test_size: 0.30
 
 feature_engineering:
-  max_features: 100
+  max_features: 100   # (kept for reference, not used now)
 
 model_building:
   n_estimators: 30
   random_state: 1
+  max_features: 100
+  ngram_range: [1, 2]

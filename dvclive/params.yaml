@@ -5,3 +5,7 @@ feature_engineering:
 model_building:
   n_estimators: 30
   random_state: 1
+  max_features: 100
+  ngram_range:
+  - 1
+  - 2

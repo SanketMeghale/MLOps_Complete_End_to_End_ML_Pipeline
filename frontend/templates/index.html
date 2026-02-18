@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+
+<div class="app-card">
+
+    <!-- Header -->
+    <h2 class="app-title">📩 Spam Detection AI</h2>
+    <p class="subtitle">
+        Paste a message below to check whether it is <strong>Spam</strong> or <strong>Safe</strong>
+    </p>
+
+    <!-- Input -->
+    <textarea
+        id="message"
+        placeholder="Example: Congratulations! You have won a FREE gift card..."
+    ></textarea>
+
+    <!-- Action -->
+    <button onclick="checkSpam()">Analyze Message</button>
+
+    <!-- Result -->
+    <div id="result" class="hidden">
+        <h3 id="status"></h3>
+        <p id="confidence"></p>
+
+        <div class="bar">
+            <div id="fill"></div>
+        </div>
+    </div>
+
+    <!-- Footer hint -->
+    <p class="hint">
+        ⚡ Powered by Machine Learning & MLOps
+    </p>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
