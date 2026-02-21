@@ -1,189 +1,579 @@
-/* ================= GLOBAL ================= */
+/* ===== GLOBAL RESET ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #000;
-}
-
-/* ================= WELCOME PAGE ================= */
-.welcome-body {
-    height: 100vh;
-    background: radial-gradient(circle at top, #1f3c88, #000);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    overflow: hidden;
-}
-
-.welcome-card {
-    position: relative;
-    padding: 60px 70px;
-    text-align: center;
-    border-radius: 28px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 0 60px rgba(0, 255, 255, 0.35);
-    animation: fadeIn 1.2s ease;
-}
-
-.welcome-card::before {
-    content: "";
-    position: absolute;
-    inset: -3px;
-    border-radius: 30px;
-    background: linear-gradient(45deg, #00f2fe, #4facfe, #7f00ff);
-    filter: blur(30px);
+/* ===== CANVAS (BACKGROUND ONLY) ===== */
+#tsparticles {
+    position: fixed;
+    inset: 0;
     z-index: -1;
+    pointer-events: none;
 }
 
-.welcome-card h1 {
-    font-size: 40px;
-    margin-bottom: 18px;
-}
-
-.welcome-card p {
-    font-size: 16px;
-    opacity: 0.9;
-    margin-bottom: 28px;
-    line-height: 1.5;
-}
-
-.welcome-card span {
-    color: #00e5ff;
-    font-weight: 600;
-}
-
-/* CTA Button */
-.start-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 16px 42px;
-    border-radius: 40px;
-    background: linear-gradient(135deg, #00f2fe, #4facfe);
-    color: black;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-}
-
-.start-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 35px rgba(0, 255, 255, 0.6);
-}
-
-/* ================= APP PAGE ================= */
-.app-body {
-    height: 100vh;
-    background: linear-gradient(135deg, #141e30, #243b55);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.app-card {
-    width: 420px;
-    padding: 35px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(16px);
-    color: white;
-    text-align: center;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-    animation: slideUp 1s ease;
-}
-
-.app-card h2 {
-    margin-bottom: 6px;
-}
-
-.app-card p {
-    font-size: 14px;
-    opacity: 0.8;
-}
-
-/* Textarea */
-textarea {
-    width: 100%;
-    height: 120px;
-    margin-top: 18px;
-    padding: 14px;
-    border-radius: 14px;
-    border: none;
-    outline: none;
-    resize: none;
-    font-size: 15px;
-}
-
-/* Button */
-button {
-    width: 100%;
-    margin-top: 18px;
-    padding: 14px;
-    border-radius: 14px;
-    border: none;
-    background: linear-gradient(135deg, #00f2fe, #4facfe);
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
-}
-
-/* Result */
+/* ===== COMMON ===== */
 .hidden {
     display: none;
 }
 
-#result {
-    margin-top: 20px;
+/* ===== FONT ENHANCEMENT ===== */
+body,
+.welcome-card,
+.app-card,
+button,
+textarea {
+    font-family: "Inter", system-ui, sans-serif;
 }
 
+/* ===== PROGRESS BAR ===== */
 .bar {
-    margin-top: 10px;
+    width: 100%;
     height: 10px;
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 10px;
+    background: #1f2937;
+    border-radius: 999px;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 #fill {
     height: 100%;
     width: 0%;
+    transition: width 0.6s ease-in-out;
+}
+
+/* ===== WELCOME PAGE ===== */
+.welcome-body {
+    min-height: 100vh;
+    background: #0b0f1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.welcome-card {
+    width: 440px;
+    padding: 42px 46px;
+
+    background: linear-gradient(
+        180deg,
+        rgba(17, 24, 39, 0.9),
+        rgba(11, 15, 26, 0.95)
+    );
+
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    position: relative;
+    z-index: 2;
+
+    animation: fadeUp 0.8s ease-out forwards;
+}
+
+.welcome-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+.welcome-card h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.welcome-card .subtitle {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.welcome-card .subtitle span {
+    color: #67e8f9;
+    font-weight: 500;
+}
+
+/* Feature pills */
+.features {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.features div {
+    background: rgba(255, 255, 255, 0.07);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+}
+
+/* Button */
+.start-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+    color: #020617;
+    padding: 12px 22px;
     border-radius: 10px;
-    transition: width 0.6s ease;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
 }
 
-/* ================= ANIMATIONS ================= */
-@keyframes fadeIn {
+.start-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(34, 211, 238, 0.4);
+}
+
+/* ===== APP PAGE ===== */
+.app-body {
+    min-height: 100vh;
+    background: #0b0f1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.app-card {
+    width: min(92vw, 520px);
+    padding: 36px 38px;
+
+    background: linear-gradient(
+        180deg,
+        rgba(17, 24, 39, 0.95),
+        rgba(11, 15, 26, 0.98)
+    );
+
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.75),
+        inset 0 0 0 1px rgba(255,255,255,0.03);
+
+    position: relative;
+    z-index: 2;
+
+    animation: fadeUp 0.7s ease-out forwards;
+}
+
+/* Card glow overlay */
+.app-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        135deg,
+        rgba(34, 211, 238, 0.12),
+        rgba(167, 139, 250, 0.08),
+        transparent 60%
+    );
+    pointer-events: none;
+}
+
+/* Title & subtitle */
+.app-title {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+}
+
+.app-subtitle {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    height: 130px;
+    margin-bottom: 18px;
+    padding: 14px 16px;
+
+    background: rgba(2, 6, 23, 0.9);
+    color: white;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+
+    resize: none;
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+    color: #020617;
+
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(34, 211, 238, 0.45);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Result */
+#result {
+    margin-top: 20px;
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+#status {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#confidence {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+/* Footer hint */
+.hint {
+    margin-top: 22px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-align: center;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: translateY(20px) scale(0.98);
     }
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0) scale(1);
     }
 }
+/* ===== HEADING FONT CHANGE ===== */
+/* ===== MODERN STYLISH HEADING ===== */
+.welcome-card h1,
+.app-title {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.6px;
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
+    background: linear-gradient(
+        135deg,
+        #22d3ee,
+        #a78bfa,
+        #f472b6
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    position: relative;
+}
+/* ===== HEADING UNDERLINE ===== */
+.welcome-card h1::after,
+.app-title::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin-top: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #22d3ee,
+        #a78bfa
+    );
+
+    border-radius: 999px;
+    opacity: 0.9;
+}
+/* ===== HEADING GLOW ===== */
+.welcome-card h1:hover,
+.app-title:hover {
+    text-shadow: 0 0 18px rgba(167, 139, 250, 0.45);
+    transition: text-shadow 0.3s ease;
+}
+/* ===== ANIMATED HEADING LINE ===== */
+.welcome-card h1::after,
+.app-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin-top: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #22d3ee,
+        #a78bfa,
+        #f472b6,
+        #22d3ee
+    );
+    background-size: 300% 100%;
+
+    border-radius: 999px;
+
+    animation: lineFlow 3s linear infinite;
+}
+
+/* Line animation */
+@keyframes lineFlow {
+    0% {
+        background-position: 0% 50%;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    100% {
+        background-position: 300% 50%;
     }
+}
+/* ===== ANIMATED HEADING LINE ===== */
+.welcome-card h1::after,
+.app-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin-top: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #22d3ee,
+        #a78bfa,
+        #f472b6,
+        #22d3ee
+    );
+    background-size: 300% 100%;
+
+    border-radius: 999px;
+
+    animation: lineFlow 3s linear infinite;
+}
+
+/* Line animation */
+@keyframes lineFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 300% 50%;
+    }
+}
+/* ===== ANIMATED BORDER GLOW ===== */
+.app-card,
+.welcome-card {
+    position: relative;
+}
+
+
+/* ===== CARD FLOAT ===== */
+/* .app-card,
+.welcome-card {
+    animation: cardFloat 6s ease-in-out infinite;
+} */
+
+@keyframes cardFloat {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+@keyframes borderFlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* ===== FLOATING DOT ===== */
+.app-title::before,
+.welcome-card h1::before {
+    content: "•";
+    color: #22d3ee;
+    margin-right: 8px;
+
+    animation: dotFloat 2s ease-in-out infinite;
+}
+
+@keyframes dotFloat {
+    0%   { transform: translateY(0); opacity: 0.6; }
+    50%  { transform: translateY(-4px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.6; }
+}
+/* ===== BUTTON SHIMMER ===== */
+/* button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transform: translateX(-100%);
+} */
+
+button:hover::after {
+    animation: shimmer 0.8s ease;
+}
+
+/* ===== SOFT BACK GLOW ===== */
+.app-card,
+.welcome-card {
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 20px 60px rgba(0,0,0,0.7),
+        0 0 80px rgba(34,211,238,0.12);
+}
+/* ===== GRADIENT OVERLAY ===== */
+.app-card::after,
+.welcome-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        160deg,
+        rgba(255,255,255,0.06),
+        transparent 40%
+    );
+    pointer-events: none;
+}
+/* ===== INPUT GLOW ===== */
+textarea:focus {
+    box-shadow:
+        0 0 0 3px rgba(56,189,248,0.15),
+        0 0 25px rgba(56,189,248,0.25);
+}
+/* ===== HOVER DEPTH ===== */
+.app-card:hover,
+.welcome-card:hover {
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.8),
+        0 0 90px rgba(34,211,238,0.18);
+}
+/* ===== MICRO CORNER LINES ===== */
+.app-card::after,
+.welcome-card::after {
+    content: "";
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    width: 28px;
+    height: 28px;
+
+    border-left: 2px solid rgba(34,211,238,0.6);
+    border-bottom: 2px solid rgba(167,139,250,0.6);
+
+    border-radius: 4px;
+    pointer-events: none;
+}
+/* ===== MICRO CORNER LINES ===== */
+.app-card::after,
+.welcome-card::after {
+    content: "";
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    width: 28px;
+    height: 28px;
+
+    border-left: 2px solid rgba(34,211,238,0.6);
+    border-bottom: 2px solid rgba(167,139,250,0.6);
+
+    border-radius: 4px;
+    pointer-events: none;
+}
+/* ===== MICRO DOT GRID ===== */
+.app-card,
+.welcome-card {
+    background-image:
+        radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+/* ===== MICRO DIVIDER ===== */
+.micro-divider {
+    height: 1px;
+    margin: 16px 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.12),
+        transparent
+    );
+}
+/* ===== SIDE INDICATOR ===== */
+.app-card {
+    border-left: 4px solid rgba(34,211,238,0.4);
+}
+/* ===== SIDE INDICATOR ===== */
+.app-card {
+    border-left: 4px solid rgba(34,211,238,0.4);
+}
+/* ===== HOLOGRAPHIC NOISE ===== */
+.app-card,
+.welcome-card {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(17,24,39,0.95),
+            rgba(11,15,26,0.98)
+        ),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+}
+/* ===== HOLOGRAPHIC NOISE ===== */
+.app-card,
+.welcome-card {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(17,24,39,0.95),
+            rgba(11,15,26,0.98)
+        ),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+}
+/* ===== CONFIDENCE REACTIVE UI ===== */
+#result[data-confidence="high"] {
+    box-shadow: 0 0 30px rgba(34,197,94,0.4);
+}
+
+#result[data-confidence="low"] {
+    box-shadow: 0 0 30px rgba(244,63,94,0.4);
+}
+/* ===== MICRO SYSTEM BLOCKS ===== */
+.system-blocks {
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    display: flex;
+    gap: 6px;
+}
+
+.system-blocks span {
+    width: 8px;
+    height: 8px;
+    background: rgba(34,211,238,0.6);
+    border-radius: 2px;
 }

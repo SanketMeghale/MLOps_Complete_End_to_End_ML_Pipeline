@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome | Spam Detection AI</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- tsParticles CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 </head>
+
 <body class="welcome-body">
 
+<!-- Canvas Background -->
+<div id="tsparticles"></div>
+
+<!-- Welcome Card -->
 <div class="welcome-card">
-    <h1>📨 Spam Detection AI</h1>
-    <p>
+    <h1>Spam Detection System</h1>
+
+    <p class="subtitle">
         Detect spam messages using<br>
         <span>Machine Learning & MLOps</span>
     </p>
@@ -20,9 +30,56 @@
         <div>🔐 Secure</div>
     </div>
 
-    <!-- 🔑 THIS MUST BE /app -->
     <a href="/app" class="start-btn">Get Started →</a>
 </div>
 
+<!-- ✅ Particle Config (YOUR ANIMATION – FIXED & SAFE) -->
+ <script>
+tsParticles.load("tsparticles", {
+    fullScreen: { enable: false },
+    background: { color: "#0b0f1a" },
+
+    particles: {
+        number: {
+            value: 150,
+            density: { enable: true, area: 1200 }
+        },
+
+        color: {
+            value: ["#22d3ee", "#38bdf8", "#a78bfa"]
+        },
+
+        size: { value: 3 },
+        opacity: { value: 0.9 },
+
+        links: {
+            enable: true,
+            color: "#38bdf8",
+            opacity: 0.9,
+            width: 1,
+            distance: 120
+        },
+
+        move: {
+            enable: true,
+            speed: 0.9
+        }
+    },
+
+    interactivity: {
+        events: {
+            onHover: { enable: true, mode: "repulse" }
+        }
+    },
+
+    detectRetina: true
+});
+</script>
+<script>
+document.addEventListener("mousemove", e => {
+    document.documentElement.style.setProperty("--x", e.clientX + "px");
+    document.documentElement.style.setProperty("--y", e.clientY + "px");
+});
+</script>
 </body>
 </html>

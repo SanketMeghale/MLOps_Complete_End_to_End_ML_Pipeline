@@ -3,28 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Spam Detector</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- tsParticles CDN (REQUIRED) -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 </head>
+
 <body class="app-body">
 
+<!-- 🌌 PARTICLE BACKGROUND -->
+<div id="tsparticles"></div>
+
+<!-- 📦 APP CARD -->
 <div class="app-card">
 
-    <!-- Header -->
-    <h2 class="app-title">📩 Spam Detection AI</h2>
-    <p class="subtitle">
-        Paste a message below to check whether it is <strong>Spam</strong> or <strong>Safe</strong>
+    <h2 class="app-title">Spam Detection System</h2>
+
+    <p class="app-subtitle">
+        Paste a message below to check whether it is
+        <strong>Spam</strong> or <strong>Safe</strong>
     </p>
 
-    <!-- Input -->
     <textarea
         id="message"
         placeholder="Example: Congratulations! You have won a FREE gift card..."
     ></textarea>
 
-    <!-- Action -->
     <button onclick="checkSpam()">Analyze Message</button>
 
-    <!-- Result -->
     <div id="result" class="hidden">
         <h3 id="status"></h3>
         <p id="confidence"></p>
@@ -34,12 +43,60 @@
         </div>
     </div>
 
-    <!-- Footer hint -->
     <p class="hint">
         ⚡ Powered by Machine Learning & MLOps
     </p>
 </div>
 
+<!-- JS -->
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- 🎨 PARTICLE CONFIG -->
+<script>
+tsParticles.load("tsparticles", {
+    fullScreen: { enable: false },
+    background: { color: "#0b0f1a" },
+
+    particles: {
+        number: {
+            value: 120,
+            density: { enable: true, area: 1200 }
+        },
+
+        color: {
+            value: ["#22d3ee", "#38bdf8", "#a78bfa"]
+        },
+
+        size: {
+            value: { min: 1, max: 4 }
+        },
+
+        opacity: {
+            value: { min: 0.3, max: 0.8 }
+        },
+
+        links: {
+            enable: true,
+            color: "#38bdf8",
+            opacity: 0.8,
+            width: 1,
+            distance: 150
+        },
+
+        move: {
+            enable: true,
+            speed: { min: 0.3, max: 1.2 }
+        }
+    },
+
+    interactivity: {
+        events: {
+            onHover: { enable: true, mode: "repulse" }
+        }
+    },
+
+    detectRetina: true
+});
+</script>
 </body>
 </html>
