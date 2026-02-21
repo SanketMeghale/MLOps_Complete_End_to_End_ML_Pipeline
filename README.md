@@ -9,7 +9,7 @@
 ![Pipeline](https://img.shields.io/badge/Pipeline-DVC%20Repro-5e35b1?style=for-the-badge&logo=apacheairflow&logoColor=white)
 
 <p align="center">
-  <img src="Spam Detection.png" alt="Spam Detection MLOps Pipeline Poster" width="100%">
+  <img src="Spam_detection design.png" alt="Spam Detection MLOps Pipeline Poster" width="100%">
 </p>
 
 
